@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/static/index.js"></script>
     <title>Stibo's ChatGPT </title>
 </head>
 <body>
     <h1>How can I help you today?</h1>
 
     {% block content %}
-        <p>{{ answer }}</p>
+        <ul id="messages">
+        </ul>
+        <ul id="answers">
+        </ul>
         <form action="" method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 
@@ -16,8 +21,8 @@
                 {{ form.message.label }}<br>
                 {{ form.message(size=32) }}
             </p>
+            <a id=submit ><button type="button"> Send </button></a>
 
-            <p>{{ form.submit() }}</p>
         </form>
 
     {% endblock %}
