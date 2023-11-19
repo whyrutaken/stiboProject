@@ -1,6 +1,5 @@
-from flask import render_template, redirect, flash, request
+from flask import render_template
 from app import app, openai_client
-from app.forms import MessageForm
 
 
 @app.route("/query/<message>")
@@ -19,13 +18,10 @@ def query_chatGPT(message):
 
 
 
-
 @app.route("/", methods=["GET", "POST"])
 @app.route("/index", methods=["GET", "POST"])
 def index():
-    form = MessageForm()
-
-    return render_template("index.html", form=form)
+    return render_template("index.html")
 
 
 

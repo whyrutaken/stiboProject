@@ -1,13 +1,18 @@
 $(document).ready(function(){
+    $('.loader').hide();
     $("#submit").click(function(){
       var message = $("#message").val();
-      $("#messages").append("<li>" + message + "</li>");
+      $(".msg-wrap").append(format_message("You", message));
       $.ajax({
           type: "GET",
           url: "/query/" + message,
+          beforeSend: function(){
+              $('.loader').show();
+              $("#message").val("")
+          },
           success: function(response) {
-            console.log(response);
-            $("#answers").append("<li>" + response + "</li>");
+              $('.loader').hide();
+              $(".msg-wrap").append(format_message("ChatGPT", response));
            },
           error: function(xhr) {
               //Handel error
@@ -17,3 +22,12 @@ $(document).ready(function(){
 });
 
 
+function format_message(sender, text) {
+    return "<div className='media msg'>" +
+            "   <div className='media-body'>" +
+            "       <h5 className='media-heading'>" + sender + "</h5>" +
+            "       <small className='col-lg-10'>" + text + "</small>" +
+            "   </div>" +
+            "</div>" +
+            "<br>"
+}
