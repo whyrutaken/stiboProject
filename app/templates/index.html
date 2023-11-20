@@ -15,6 +15,10 @@
 </head>
 
 <body>
+    {% block content %}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    {% endblock %}
+
     <h1>GPT 3.5 :: How can I help you today?</h1>
     <br><br>
 
@@ -32,6 +36,7 @@
 
         <textarea id=message class="form-control send-message" rows="2" placeholder="Message ChatGPT..."></textarea>
         <a id=submit ><button type="button"> Send </button></a>
+
     </div>
 
 
